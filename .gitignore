@@ -1,0 +1,37 @@
+
+# Node modules (para ambos, frontend y backend)
+**/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Archivos de entorno
+.env
+.env.*.local
+!.env.example
+
+# Directorios de build y distribución
+/dist
+/build
+/.next
+/out
+
+# Caché de Vite
+/.vite
+
+# Archivos y carpetas del sistema
+.DS_Store
+Thumbs.db
+
+# Configuraciones de editores e IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Archivos temporales
+tmp/
+temp/
