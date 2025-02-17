@@ -1,5 +1,10 @@
+import { Box } from "@mui/material";
+import { TopBar } from "@components/TopBar/TopBar";
+
 export const List = () => {
-  return (<div>
-    <h1>List</h1>
-  </div>);
+  return (
+    <Box sx={{ display: "flex" }} mt="2em">
+      <TopBar />
+    </Box>
+  );
 }
