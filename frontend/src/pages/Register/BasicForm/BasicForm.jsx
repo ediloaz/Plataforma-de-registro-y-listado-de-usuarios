@@ -26,7 +26,7 @@ export const BasicForm = () => {
         <AreaCodeInput label="Código de área" color="secondary" fullWidth {...register("areaCode", "select")} />
       </Grid>
       <Grid item xs={12} pb="4px">
-        <TextInput label="Número de teléfono" placeholder="ejemplo@gmail.com" fullWidth color="secondary" {...register("phone", "text")} />
+        <TextInput label="Número de teléfono" placeholder="0000-0000" fullWidth color="secondary" {...register("phone", "text")} />
       </Grid>
       <Grid item xs={12} pb="24px">
         <SelectInput label="Tipo de identificación" placeholder="Seleccionar" fullWidth color="secondary" {...register("phone", "select")}>
