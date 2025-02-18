@@ -9,7 +9,7 @@ export const RegisterButtonActions = ({ step, onContinue, onCancel }) => {
 
   return (
     <Grid container width="100%" px="17px">
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={step == 0 ? 12 : 6}>
         <Button variant="contained" color="primary" sx={{ height: '48px', textTransform: 'none' }} fullWidth onClick={onContinue}>Continuar</Button>
       </Grid>
       <Grid item xs={12} md={6}>

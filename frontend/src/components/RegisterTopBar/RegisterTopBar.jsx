@@ -6,13 +6,12 @@ import { usePageStore } from "@stores/usePageStore";
 import { Resources } from "@theme/Resources";
 
 export const RegisterTopBar = ({ step, displayImage }) => {
-  if (step == 0) return;
-  
   const { logo, backgroundTopBar, loginBackground } = Resources();
   
   return (
     <AppBar position={displayImage ? "relative" : "fixed"} enableColorOnDark
       sx={{
+        display: { xs: "block", md: step == 0 ? 'none' : 'block'},
         width: '100%',
         maxHeight: '610px',
         zIndex: (theme) => theme.zIndex.drawer + 1,

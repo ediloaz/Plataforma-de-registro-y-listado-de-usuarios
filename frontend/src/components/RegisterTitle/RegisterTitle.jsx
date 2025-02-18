@@ -15,7 +15,7 @@ export const RegisterTitle = ({ title, step, setStep }) => {
   const displayBackButton = step !== 0;
 
   return (
-    <Grid container width="100%">
+    <Grid container width="100%" pl={{ xs: "0", md: "20px" }}>
       <Grid item xs={12} pt="42px" pb="32px" display="flex" justifyContent={{ xs: "center", md: "start" }} alignItems="center">
         {displayBackButton && (
           <IconButton onClick={onPrevious} sx={{ display: { xs: 'block', md: 'none' }, position: "absolute", left: "10px"}}>

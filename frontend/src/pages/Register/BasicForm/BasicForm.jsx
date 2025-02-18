@@ -31,6 +31,7 @@ export const BasicForm = () => {
       <Grid item xs={12} pb="24px">
         <SelectInput label="Tipo de identificación" placeholder="Seleccionar" fullWidth color="secondary" {...register("phone", "select")}>
           <MenuItem value="cedula">Cédula</MenuItem>
+          <MenuItem value="juridica">Jurídica</MenuItem>
           <MenuItem value="pasaporte">Pasaporte</MenuItem>
         </SelectInput>
       </Grid>
