@@ -1,22 +1,22 @@
-import { AppBar, Box, Divider, Grid, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
+import { AppBar, Box, Collapse, Divider, Grid, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
 import { DarkMode, LightMode, LogoutRounded, Menu } from "@mui/icons-material";
 import { useThemeModeContext, useToggleThemeContext } from "@components/CustomThemeProvider/CustomThemeProvider";
 import { Link } from "react-router-dom";
 import { usePageStore } from "@stores/usePageStore";
 import { Resources } from "@theme/Resources";
 
-export const TopBar = () => {
+export const RegisterTopBar = ({ displayImage }) => {
   const theme = useTheme();
   const themeMode = useThemeModeContext();
   const toggleTheme = useToggleThemeContext();
   const title = usePageStore((store) => store.title);
-  const { logoWhite, backgroundTopBar } = Resources();
+  const { logo, backgroundTopBar, loginBackground } = Resources();
   
   return (
-    <AppBar position="fixed" enableColorOnDark 
+    <AppBar position={displayImage ? "relative" : "fixed"} enableColorOnDark
       sx={{
         width: '100%',
-        height: '83px',
+        maxHeight: '610px',
         zIndex: (theme) => theme.zIndex.drawer + 1,
         background: 'linear-gradient(217.64deg, #006DFF -5.84%, #5038ED 106.73%)',
         '&::before': {
@@ -33,12 +33,13 @@ export const TopBar = () => {
         },
       }}
     >
-      <Toolbar sx={{ height: '83px', px: '68px !important' }}>
-        <Grid container alignItems="center" justifyContent="space-between">
-          <Link to="/list" style={{ display: 'grid', alignItems: 'center' }} ><img src={logoWhite} width={106} alt="logoWhite" /></Link>
-          <IconButton title="Salir">
-            <LogoutRounded sx={{ color: theme.palette.common.white }} />
-          </IconButton>
+      <Toolbar sx={{ maxHeight: '610px', px: '0px !important' }}>
+        <Grid container display="flex" alignItems="center" justifyContent="space-between">
+          <Collapse in={displayImage} sx={{ width: '100%' }}>
+            <Grid item xs={12} md={0} p="50px" display="flex" justifyContent="center" alignItems="center">
+              <img src={loginBackground} alt="loginBackground" style={{ width: "100%", maxWidth: '330px', maxHeight: '438px' }} />
+            </Grid>
+          </Collapse>
         </Grid>
       </Toolbar>
     </AppBar>

@@ -36,14 +36,10 @@ export const ListRegisters = () => {
   const rows = [
     { id: 1, name: 'John Doe', email: 'johndoe@email.com', phone: '1234567890' },
     { id: 2, name: 'Jane Doe', email: 'janedoe@email.com', phone: '0987654321' },
-
-
-
   ]
+
   return (
     <DataGridPremium
-      disableRowSelectionOnClick
-      slotProps={{ baseButton: { color: 'inherit', variant: "Link" } }}
       slots={{
         // toolbar: () => CustomToolbar(true),
         loadingOverlay: LinearProgress,
@@ -53,7 +49,7 @@ export const ListRegisters = () => {
       loading={false}
       initialState={{
         pagination: { paginationModel: { pageSize: 10 } },
-        pinnedColumns: {  right: ['actions'] },
+        pinnedColumns: {  left: ['name'] },
       }}
       pageSizeOptions={[5, 10, 25]}
       sx={{

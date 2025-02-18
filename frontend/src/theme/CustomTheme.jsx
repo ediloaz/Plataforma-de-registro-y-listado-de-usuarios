@@ -15,14 +15,14 @@ export const getTheme = (mode) => {
           white: WHITE_COLOR,
         },
         primary: {
-          main: "#cf6f0e",
+          main: "#FF5C00",
           light: "#f19539",
           dark: "#9f560b",
         },
         secondary: {
-          main: "dark" ? "#bebdbd" : "#5C5B5B",
-          light: "dark" ? "#f8f8f8" : "#363535",
-          dark: "dark" ? "#838282" : "#828181",
+          main: "#195DFA",
+          light: "#195DFA",
+          dark: "#195DFA",
         },
         red: {
           100: "#FFEBEE",
