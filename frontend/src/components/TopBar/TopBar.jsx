@@ -1,17 +1,20 @@
-import { AppBar, Box, Divider, Grid, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
-import { DarkMode, LightMode, LogoutRounded, Menu } from "@mui/icons-material";
-import { useThemeModeContext, useToggleThemeContext } from "@components/CustomThemeProvider/CustomThemeProvider";
-import { Link } from "react-router-dom";
-import { usePageStore } from "@stores/usePageStore";
 import { Resources } from "@theme/Resources";
+import { Link, useNavigate } from 'react-router-dom';
+import { LogoutRounded } from "@mui/icons-material";
+import { usePageStore } from "@stores/usePageStore";
+import { AppBar, Grid, IconButton, Toolbar, useTheme } from "@mui/material";
+import { useThemeModeContext, useToggleThemeContext } from "@components/CustomThemeProvider/CustomThemeProvider";
 
 export const TopBar = () => {
   const theme = useTheme();
-  const themeMode = useThemeModeContext();
-  const toggleTheme = useToggleThemeContext();
-  const title = usePageStore((store) => store.title);
+  const navigate = useNavigate();
+
   const { logoWhite, backgroundTopBar } = Resources();
   
+  const goToRegister = (page) => {
+    navigate("/Registrar");
+  }
+
   return (
     <AppBar position="fixed" enableColorOnDark 
       sx={{
@@ -36,7 +39,7 @@ export const TopBar = () => {
       <Toolbar sx={{ height: '83px', px: '68px !important' }}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Link to="/list" style={{ display: 'grid', alignItems: 'center' }} ><img src={logoWhite} width={106} alt="logoWhite" /></Link>
-          <IconButton title="Salir">
+          <IconButton title="Salir" onClick={goToRegister}>
             <LogoutRounded sx={{ color: theme.palette.common.white }} />
           </IconButton>
         </Grid>
