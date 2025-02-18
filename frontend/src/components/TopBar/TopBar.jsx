@@ -1,9 +1,7 @@
 import { Resources } from "@theme/Resources";
 import { Link, useNavigate } from 'react-router-dom';
 import { LogoutRounded } from "@mui/icons-material";
-import { usePageStore } from "@stores/usePageStore";
 import { AppBar, Grid, IconButton, Toolbar, useTheme } from "@mui/material";
-import { useThemeModeContext, useToggleThemeContext } from "@components/CustomThemeProvider/CustomThemeProvider";
 
 export const TopBar = () => {
   const theme = useTheme();

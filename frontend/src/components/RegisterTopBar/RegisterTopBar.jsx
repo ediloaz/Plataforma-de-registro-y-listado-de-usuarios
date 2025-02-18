@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 import { usePageStore } from "@stores/usePageStore";
 import { Resources } from "@theme/Resources";
 
-export const RegisterTopBar = ({ displayImage }) => {
-  const theme = useTheme();
-  const themeMode = useThemeModeContext();
-  const toggleTheme = useToggleThemeContext();
-  const title = usePageStore((store) => store.title);
+export const RegisterTopBar = ({ step, displayImage }) => {
+  if (step == 0) return;
+  
   const { logo, backgroundTopBar, loginBackground } = Resources();
   
   return (
