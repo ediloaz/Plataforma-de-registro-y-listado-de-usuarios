@@ -25,7 +25,6 @@ export default ({ mode }) => {
         '@constants': path.resolve(__dirname, 'src/constants'),
         '@contracts': path.resolve(__dirname, 'src/contracts'),
         '@locales': path.resolve(__dirname, 'src/locales'),
-        '@models': path.resolve(__dirname, 'src/models'),
       },
     },
     plugins: [react()],
