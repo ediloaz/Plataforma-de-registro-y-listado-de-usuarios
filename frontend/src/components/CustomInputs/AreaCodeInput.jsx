@@ -4,7 +4,6 @@ import { SelectInput } from "@components/CustomInputs/SelectInput";
 import { countries } from '@constants/countries';
 
 export const AreaCodeInput = (props) => {
-  
   return (
     <SelectInput
       {...props}>

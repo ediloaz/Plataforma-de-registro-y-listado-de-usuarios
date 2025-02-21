@@ -8,7 +8,6 @@ import { NotFound } from "@pages/NotFound/NotFound";
 import { Home } from "@pages/Home/Home";
 
 export const Router = () => {
-  console.log('Router');
   return (
     <BrowserRouter>
       <Routes>

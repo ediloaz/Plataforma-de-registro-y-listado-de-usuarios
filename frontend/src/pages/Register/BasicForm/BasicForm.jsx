@@ -4,13 +4,7 @@ import { SelectInput } from "@components/CustomInputs/SelectInput";
 import { AreaCodeInput } from "@components/CustomInputs/AreaCodeInput";
 import { useBasicForm } from "./useBasicForm";
 
-export const BasicForm = () => {
-  const {
-    register,
-    handleSubmit,
-    loading,
-  } = useBasicForm();
-
+export const BasicForm = ({ register }) => {
   return (
     <Grid container width="100%" px="17px">
       <Grid item xs={12} pb="4px">
@@ -29,14 +23,14 @@ export const BasicForm = () => {
         <TextInput label="Número de teléfono" placeholder="0000-0000" fullWidth color="secondary" {...register("phone", "text")} />
       </Grid>
       <Grid item xs={12} pb="24px">
-        <SelectInput label="Tipo de identificación" placeholder="Seleccionar" fullWidth color="secondary" {...register("phone", "select")}>
+        <SelectInput label="Tipo de identificación" placeholder="Seleccionar" fullWidth color="secondary" {...register("identificationType", "select")}>
           <MenuItem value="cedula">Cédula</MenuItem>
           <MenuItem value="juridica">Jurídica</MenuItem>
           <MenuItem value="pasaporte">Pasaporte</MenuItem>
         </SelectInput>
       </Grid>
       <Grid item xs={12} pb="24px">
-        <TextInput label="Número de identificación" placeholder="1-1234-1234" fullWidth color="secondary" {...register("email", "text")} />
+        <TextInput label="Número de identificación" placeholder="1-1234-1234" fullWidth color="secondary" {...register("identification", "text")} />
       </Grid>
     </Grid>
   );

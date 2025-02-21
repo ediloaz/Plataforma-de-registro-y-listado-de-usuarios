@@ -33,8 +33,6 @@ export const useBasicForm = () => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    console.log(data)
-
   }
 
   return {

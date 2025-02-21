@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { usePageStore } from "@stores/usePageStore";
 import { Resources } from "@theme/Resources";
 
-export const RegisterTopBar = ({ step, displayImage }) => {
+export const RegisterTopBar = ({ step, displayMobileImage }) => {
   const { logo, backgroundTopBar, loginBackground } = Resources();
   
   return (
-    <AppBar position={displayImage ? "relative" : "fixed"} enableColorOnDark
+    <AppBar position={displayMobileImage ? "relative" : "fixed"} enableColorOnDark
       sx={{
         display: { xs: "block", md: step == 0 ? 'none' : 'block'},
         width: '100%',
@@ -32,7 +32,7 @@ export const RegisterTopBar = ({ step, displayImage }) => {
     >
       <Toolbar sx={{ maxHeight: '610px', px: '0px !important' }}>
         <Grid container display="flex" alignItems="center" justifyContent="space-between">
-          <Collapse in={displayImage} sx={{ width: '100%' }}>
+          <Collapse in={displayMobileImage} sx={{ width: '100%' }}>
             <Grid item xs={12} md={0} p="50px" display="flex" justifyContent="center" alignItems="center">
               <img src={loginBackground} alt="loginBackground" style={{ width: "100%", maxWidth: '330px', maxHeight: '438px' }} />
             </Grid>
