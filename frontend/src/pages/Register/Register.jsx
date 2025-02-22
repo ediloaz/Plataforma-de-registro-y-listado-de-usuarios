@@ -26,19 +26,55 @@ export const Register = () => {
   const boxWidth = displayMobileImage ? "100%" : "100vw";
   
   return (
-    <Box width={boxWidth} height="100%" minHeight="100vh" pb="22px" display="flex" flexDirection="column" justifyContent="flex-start" alignItems="center">
-      <Grid container component="form" onSubmit={handleSubmit} width="100%">
-        <Grid item xs={0} md={6} sx={{ display: { xs: "none", md: displayLeftImage ? "block" : "none"} }}>
-          <LeftImageRegistration />
+    <Box sx={{ display: "flex", height: "100vh" }}>
+      <Box
+        sx={{
+          top: 0,
+          width: "50%",
+          position: "sticky",
+          backgroundColor: "#fff",
+          display: { xs: "none", md: displayLeftImage ? "block" : "none" },
+        }}
+      >
+        <LeftImageRegistration />
+      </Box>
+
+      <Box sx={{ flex: 1, overflowY: "auto", pb: 4 }}>
+        <Grid
+          container
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ width: boxWidth, mx: "auto" }}
+        >
+          <Grid item xs={12} md={step === 0 ? 12 : 12}>
+            <RegisterTopBar 
+              step={step}
+              onPreviousStep={onPreviousStep}
+              displayMobileImage={displayMobileImage} 
+            />
+            <Box height="44px" m={0} />
+            <RegisterTitle
+              step={step}
+              title={titlesRegisterSteps?.[step]}
+              onPreviousStep={onPreviousStep}
+            />
+            <Steps
+              step={step}
+              setPhoto={setPhoto}
+              register={register}
+              setValue={setValue}
+              onNextStep={onNextStep}
+              setDocument={setDocument}
+              onRestartSteps={onRestartSteps}
+            />
+            <RegisterButtonActions
+              step={step}
+              onNextStep={onNextStep}
+              onRestartSteps={onRestartSteps}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={step == 0 ? 6 : 12}>
-          <RegisterTopBar displayMobileImage={displayMobileImage} step={step} />
-          <Box height="10px" m={0} />
-          <RegisterTitle title={titlesRegisterSteps?.[step]} step={step} onPreviousStep={onPreviousStep} />
-          <Steps step={step} setDocument={setDocument} setPhoto={setPhoto} register={register} setValue={setValue} onNextStep={onNextStep} onRestartSteps={onRestartSteps} />
-          <RegisterButtonActions step={step} onNextStep={onNextStep} onRestartSteps={onRestartSteps} /> 
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }

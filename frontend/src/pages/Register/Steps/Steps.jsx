@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Grid } from "@mui/material";
 import { RegisterTopBar } from "@components/RegisterTopBar/RegisterTopBar";
 import { RegisterTitle } from "@components/RegisterTitle/RegisterTitle";
+import { RegisterButtonActions } from "@components/RegisterButtonActions/RegisterButtonActions";
 
 import { BasicForm } from "../BasicForm/BasicForm";
 import { LocationForm } from "../LocationForm/LocationForm";
@@ -23,7 +24,7 @@ export const Steps = ({ step, setValue, setDocument, setPhoto, register, onNextS
   }
 
   return (
-    <Grid container width="100%">
+    <Grid container width="100%" minHeight="85vh" justifyContent="center" alignItems="center">
       {getStepContent(step)}
     </Grid>
   );

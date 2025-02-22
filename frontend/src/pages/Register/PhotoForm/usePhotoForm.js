@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import locations from "@data/locations.json";
 import { Resources } from "@theme/Resources";
 
-export const useLocationForm = ({ register, setValue, setDocument }) => {
+export const usePhotoForm = ({ register, setValue, setDocument }) => {
   const [provinces, setProvinces] = useState([]);
   const [cantons, setCantons] = useState([]);
   const [districts, setDistricts] = useState([]);

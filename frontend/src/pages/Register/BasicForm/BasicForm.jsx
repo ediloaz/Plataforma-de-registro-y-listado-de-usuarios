@@ -1,12 +1,22 @@
-import { Grid, MenuItem } from "@mui/material";
+import { Grid, MenuItem, Typography } from "@mui/material";
 import { TextInput } from "@components/CustomInputs/TextInput";
 import { SelectInput } from "@components/CustomInputs/SelectInput";
 import { AreaCodeInput } from "@components/CustomInputs/AreaCodeInput";
 import { useBasicForm } from "./useBasicForm";
 
 export const BasicForm = ({ register }) => {
+  const { logo } = useBasicForm();
+
   return (
     <Grid container width="100%" px="17px">
+      <Grid item xs={12} pb="32px" mt={{ xs: '0', md: '100px'}} display={{ xs: 'none', md: 'flex'}} justifyContent="left" alignItems="center">
+        <img src={logo} alt="logo" style={{ width: "130px" }} />
+      </Grid>
+      <Grid item xs={12} pt={0} pb="50px" display={{ xs: 'none', md: 'flex'}} justifyContent="left" alignItems="center">
+        <Typography fontSize="24px" fontWeight="bold">
+          Registro
+        </Typography>
+      </Grid>
       <Grid item xs={12} pb="4px">
         <TextInput label="Nombres completos" placeholder="Ingresar nombres" fullWidth color="secondary" {...register("name", "text")} />
       </Grid>

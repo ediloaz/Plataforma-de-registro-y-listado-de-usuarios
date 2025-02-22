@@ -1,13 +1,16 @@
 import { AppBar, Box, Collapse, Divider, Grid, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
-import { DarkMode, LightMode, LogoutRounded, Menu } from "@mui/icons-material";
+import { ArrowBackRounded, DarkMode, LightMode, LogoutRounded, Menu } from "@mui/icons-material";
 import { useThemeModeContext, useToggleThemeContext } from "@components/CustomThemeProvider/CustomThemeProvider";
 import { Link } from "react-router-dom";
 import { usePageStore } from "@stores/usePageStore";
 import { Resources } from "@theme/Resources";
 
-export const RegisterTopBar = ({ step, displayMobileImage }) => {
+export const RegisterTopBar = ({ step, onPreviousStep, displayMobileImage }) => {
   const { logo, backgroundTopBar, loginBackground } = Resources();
   
+  const displayBackButton = step !== 0;
+  const theme = useTheme();
+
   return (
     <AppBar position={displayMobileImage ? "relative" : "fixed"} enableColorOnDark
       sx={{
@@ -30,8 +33,13 @@ export const RegisterTopBar = ({ step, displayMobileImage }) => {
         },
       }}
     >
-      <Toolbar sx={{ maxHeight: '610px', px: '0px !important' }}>
+      <Toolbar sx={{ minHeight: '34px !important', maxHeight: '610px', px: '0px !important' }}>
         <Grid container display="flex" alignItems="center" justifyContent="space-between">
+          {displayBackButton && (
+            <IconButton onClick={onPreviousStep} sx={{ display: { xs: 'none', md: 'block' }, position: "absolute", left: "10px" }}>
+              <ArrowBackRounded fontSize="small" sx={{ color: theme.palette.common.white }} />
+            </IconButton>
+          )}
           <Collapse in={displayMobileImage} sx={{ width: '100%' }}>
             <Grid item xs={12} md={0} p="50px" display="flex" justifyContent="center" alignItems="center">
               <img src={loginBackground} alt="loginBackground" style={{ width: "100%", maxWidth: '330px', maxHeight: '438px' }} />
