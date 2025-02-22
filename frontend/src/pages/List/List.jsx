@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { TopBar } from "@components/TopBar/TopBar";
-import { ListRegisters } from "@components/ListRegisters/ListRegisters";
+import { ListUsers } from "@components/ListUsers/ListUsers";
 
 export const List = () => {
   return (
@@ -11,7 +11,7 @@ export const List = () => {
           <Typography variant="h1" fontWeight={500} fontSize="24px !important">Historial de registro</Typography>
         </Grid>
         <Grid item xs={12} px='68px' sx={{ width: '100%' }}>
-          <ListRegisters />
+          <ListUsers />
         </Grid>
       </Grid>
     </Box>

@@ -1,0 +1,1 @@
+export const READONLY_COLUMNS_PROPS = { resizable: false, sortable: false, disableColumnMenu: true };

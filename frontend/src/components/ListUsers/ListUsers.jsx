@@ -1,26 +1,28 @@
-import { Button, LinearProgress, Typography, useTheme } from "@mui/material";
+import { Button, LinearProgress, Typography} from "@mui/material";
 import { DataGridPremium } from "@mui/x-data-grid-premium";
+import { useListUsers } from "./useListUsers";
+import { READONLY_COLUMNS_PROPS } from "@constants/tables";
 
-export const ListRegisters = () => {
-  const theme = useTheme();
+export const ListUsers = () => {
+  const { theme, users } = useListUsers();
 
   const columns = [
-    { field: 'name', headerName: 'Nombre y apellidos', flex: 1,
+    { field: 'name', headerName: 'Nombre y apellidos', flex: 1, minWidth: 200,
       renderCell: (params) => (
         <Typography fontWeight={600} fontSize="14px">{params.row?.name}</Typography>
       )
     },
-    { field: 'email', headerName: 'Correo electrónico', flex: 1,
+    { field: 'email', headerName: 'Correo electrónico', flex: 1, minWidth: 248,
       renderCell: (params) => (
-        <Typography fontWeight={500} fontSize="14px" color="GrayText">{params.row?.name}</Typography>
+        <Typography fontWeight={500} fontSize="14px" color="GrayText">{params.row?.email}</Typography>
       )
     },
-    { field: 'phone', headerName: 'Número telefónico', flex: 1,
+    { field: 'phone', headerName: 'Número telefónico', flex: 1, minWidth: 248,
       renderCell: (params) => (
-        <Typography fontWeight={500} fontSize="14px" color="GrayText">{params.row?.name}</Typography>
+        <Typography fontWeight={500} fontSize="14px" color="GrayText">{params.row?.phone}</Typography>
       )
     },
-    { field: 'actions', headerName: 'Acciones', flex: 1, 
+    { ...READONLY_COLUMNS_PROPS, field: 'actions', headerName: 'Acciones', flex: 1, minWidth: 200,
       renderCell: (params) => (
         <Button
           variant="text"
@@ -33,18 +35,13 @@ export const ListRegisters = () => {
       )
     },
   ]
-  const rows = [
-    { id: 1, name: 'John Doe', email: 'johndoe@email.com', phone: '1234567890' },
-    { id: 2, name: 'Jane Doe', email: 'janedoe@email.com', phone: '0987654321' },
-  ]
+  
 
   return (
     <DataGridPremium
-      slots={{
-        // toolbar: () => CustomToolbar(true),
-        loadingOverlay: LinearProgress,
-      }}
-      rows={rows}
+      getRowId={(row) => row._id}
+      slots={{ loadingOverlay: LinearProgress }}
+      rows={users}
       columns={columns}
       loading={false}
       initialState={{
@@ -66,6 +63,7 @@ export const ListRegisters = () => {
           fontWeight: 600,
         },
       }}
+      hideFooter
     />
   );
 }
