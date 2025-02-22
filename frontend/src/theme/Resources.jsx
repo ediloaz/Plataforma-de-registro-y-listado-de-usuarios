@@ -13,6 +13,6 @@ export const Resources = () => {
     logoWhite,
     notFoundLogo,
     favicon,
-    appName: 'Plataforma | FactorPyme',
+    appName: 'Samla -  Plataforma de registro y listado de usuarios',
   }
 };
