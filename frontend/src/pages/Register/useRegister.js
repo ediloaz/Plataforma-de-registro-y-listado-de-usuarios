@@ -50,6 +50,7 @@ export const useRegister = () => {
       navigate("/List");
     })
     .catch((error) => {
+      console.error(error)
       showAlert(`Error al crear el usuario: ${error}`, 'error')
     })
     .finally(() => {
