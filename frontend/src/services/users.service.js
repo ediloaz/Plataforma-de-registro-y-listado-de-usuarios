@@ -5,7 +5,7 @@ const ROOT_URL = '/users/';
 
 export const getAllUsers = async () => {
   try {
-    const { data } = await axios.get(`${ROOT_URL}/get-all`);
+    const { data } = await axios.get(`${ROOT_URL}get-all`);
     return data;
   } catch (error) {
     handleRequestError(error);
@@ -14,7 +14,7 @@ export const getAllUsers = async () => {
 
 export const getUserById = async (userId) => {
   try {
-    const { data } = await axios.get(`${ROOT_URL}/get-by-id/${userId}`);
+    const { data } = await axios.get(`${ROOT_URL}get-by-id/${userId}`);
     return data;
   } catch (error) {
     handleRequestError(error);
@@ -23,7 +23,7 @@ export const getUserById = async (userId) => {
 
 export const postUser = async (userData) => {
   try {
-    const { data } = await axios.post(`${ROOT_URL}/create`, userData);
+    const { data } = await axios.post(`${ROOT_URL}create`, userData);
     return data;
   } catch (error) {
     handleRequestError(error);
@@ -32,7 +32,7 @@ export const postUser = async (userData) => {
 
 export const editUser = async (userId, userData) => {
   try {
-    const { data } = await axios.put(`${ROOT_URL}/update/${userId}`, userData);
+    const { data } = await axios.put(`${ROOT_URL}update/${userId}`, userData);
     return data;
   } catch (error) {
     handleRequestError(error);
@@ -41,7 +41,7 @@ export const editUser = async (userId, userData) => {
 
 export const deleteUser = async (userId) => {
   try {
-    const { data } = await axios.delete(`${ROOT_URL}/delete/${userId}`);
+    const { data } = await axios.delete(`${ROOT_URL}delete/${userId}`);
     return data;
   } catch (error) {
     handleRequestError(error);

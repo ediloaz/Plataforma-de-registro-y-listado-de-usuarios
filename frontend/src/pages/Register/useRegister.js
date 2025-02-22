@@ -1,13 +1,19 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import { useCustomRegister } from "@hooks/useCustomRegister";
-import { userModel } from "@models/user.model";
 import { useState } from "react";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { userModel } from "@models/user.model";
+import { postUser } from "@services/users.service";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useCustomRegister } from "@hooks/useCustomRegister";
+import { useAlertMessageContext } from "@components/AlertMessage/AlertMessage";
 
 export const useRegister = () => {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const showAlert = useAlertMessageContext();
   
   const schema = yup.object({
     name: yup.string().required('El nombre es requerido'),
@@ -36,6 +42,19 @@ export const useRegister = () => {
   const onSubmit = (data) => {
     setLoading(true)
     console.log(data)
+
+    postUser(data)
+    .then((response) => {
+      console.log(response)
+      showAlert('Usuario creado correctamente', 'success')
+      navigate("/List");
+    })
+    .catch((error) => {
+      showAlert(`Error al crear el usuario: ${error}`, 'error')
+    })
+    .finally(() => {
+      setLoading(false)
+    })    
   }
 
   const checkFieldValuesForFirstStep = () => {
@@ -59,6 +78,7 @@ export const useRegister = () => {
 
     if (step == 0) {
       if (!checkFieldValuesForFirstStep()) {
+        showAlert('Complete los campos faltantes', 'warning')
         return;
       }
     }

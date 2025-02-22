@@ -13,13 +13,14 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('API para la plataforma de registro y listado de usuarios.');
 });
 
 
-app.get('/api/user/get-all', (req, res) => {
+app.get('/api/users/get-all', (req, res) => {
   // Devolvemos todos los registros
 
   res.json({
@@ -28,7 +29,7 @@ app.get('/api/user/get-all', (req, res) => {
   });
 });
 
-app.get('/api/user/get-by-id/:id', (req, res) => {
+app.get('/api/users/get-by-id/:id', (req, res) => {
   // Devolvemos el registro con el ID solicitado
 
   res.json({
@@ -37,19 +38,22 @@ app.get('/api/user/get-by-id/:id', (req, res) => {
   });
 });
 
-app.get('/api/user/create', (req, res) => {
-  // Para añadir al registro que se crea
-  // const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  // const geo = geoip.lookup(ip) || {};
-  // const region = geo.region || 'N/A';
+app.post('/api/users/create', (req, res) => {
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const geo = geoip.lookup(ip) || {};
+  const region = geo.region || 'N/A';
+  const userData = req.body;
+  const timestamp = Date.now();
 
   res.json({
-    timestamp: Date.now(),
-    texto: "Hola Mundo",
+    ...userData,
+    ip,
+    region,
+    timestamp,
   });
 });
 
-app.get('/api/user/update/:id', (req, res) => {
+app.put('/api/users/update/:id', (req, res) => {
   // Actualizamos el registro con el ID solicitado
 
   res.json({
@@ -58,7 +62,7 @@ app.get('/api/user/update/:id', (req, res) => {
   });
 });
 
-app.get('/api/user/delete/:id', (req, res) => {
+app.delete('/api/users/delete/:id', (req, res) => {
   // Eliminamos el registro con el ID solicitado
 
   res.json({

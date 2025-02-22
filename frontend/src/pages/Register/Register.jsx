@@ -33,7 +33,7 @@ export const Register = () => {
           <Box height="10px" m={0} />
           <RegisterTitle title={titlesRegisterSteps?.[step]} step={step} onPreviousStep={onPreviousStep} />
           <Steps step={step} register={register} onNextStep={onNextStep} onRestartSteps={onRestartSteps} />
-          <RegisterButtonActions step={step} onNextStep={onNextStep} onRestartSteps={onRestartSteps} /> 
+          <RegisterButtonActions step={step} onNextStep={handleSubmit || onNextStep} onRestartSteps={onRestartSteps} /> 
         </Grid>
       </Grid>
     </Box>
