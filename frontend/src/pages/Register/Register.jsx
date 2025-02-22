@@ -11,7 +11,10 @@ export const Register = () => {
   const {
     step,
     loading,
+    setValue,
+    setPhoto,
     onNextStep,
+    setDocument,
     onPreviousStep,
     onRestartSteps,
     register,
@@ -28,12 +31,12 @@ export const Register = () => {
         <Grid item xs={0} md={6} sx={{ display: { xs: "none", md: displayLeftImage ? "block" : "none"} }}>
           <LeftImageRegistration />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={step == 0 ? 6 : 12}>
           <RegisterTopBar displayMobileImage={displayMobileImage} step={step} />
           <Box height="10px" m={0} />
           <RegisterTitle title={titlesRegisterSteps?.[step]} step={step} onPreviousStep={onPreviousStep} />
-          <Steps step={step} register={register} onNextStep={onNextStep} onRestartSteps={onRestartSteps} />
-          <RegisterButtonActions step={step} onNextStep={handleSubmit || onNextStep} onRestartSteps={onRestartSteps} /> 
+          <Steps step={step} setDocument={setDocument} setPhoto={setPhoto} register={register} setValue={setValue} onNextStep={onNextStep} onRestartSteps={onRestartSteps} />
+          <RegisterButtonActions step={step} onNextStep={onNextStep} onRestartSteps={onRestartSteps} /> 
         </Grid>
       </Grid>
     </Box>
