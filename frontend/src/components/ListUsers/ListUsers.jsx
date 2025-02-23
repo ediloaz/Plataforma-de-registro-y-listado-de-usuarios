@@ -2,9 +2,21 @@ import { Button, LinearProgress, Typography} from "@mui/material";
 import { DataGridPremium } from "@mui/x-data-grid-premium";
 import { useListUsers } from "./useListUsers";
 import { READONLY_COLUMNS_PROPS } from "@constants/tables";
+import { ProfileDialog } from "@components/ProfileDialog/ProfileDialog";
+import { useState } from "react";
 
 export const ListUsers = () => {
   const { theme, users } = useListUsers();
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState({});
+  
+  const handleClose = () => setOpen(false);
+
+  const handleOpen = (user) => {
+    console.log('Abrir el usuario', user);
+    setUser(user);
+    setOpen(true);
+  }
 
   const columns = [
     { field: 'name', headerName: 'Nombre y apellidos', flex: 1, minWidth: 200,
@@ -27,7 +39,7 @@ export const ListUsers = () => {
         <Button
           variant="text"
           color="info"
-          onClick={() => alert(params.row?.name)}
+          onClick={() => handleOpen(params.row)}
           sx={{ textTransform: 'none' }}
         >
           Ver detalle
@@ -35,35 +47,41 @@ export const ListUsers = () => {
       )
     },
   ]
-  
 
   return (
-    <DataGridPremium
-      getRowId={(row) => row._id}
-      slots={{ loadingOverlay: LinearProgress }}
-      rows={users}
-      columns={columns}
-      loading={false}
-      initialState={{
-        pagination: { paginationModel: { pageSize: 10 } },
-        pinnedColumns: {  left: ['name'] },
-      }}
-      pageSizeOptions={[5, 10, 25]}
-      sx={{
-        minHeight: '10em',
-        border: 'none',
-        '& .MuiDataGrid-columnHeaders': {
-          borderBottom: 'none',
-        },
-        '& .MuiDataGrid-cell': {
-          borderBottom: 'none',
-        },
-        '& .MuiDataGrid-columnHeaderTitle': {
-          color: theme.palette.text.secondary,
-          fontWeight: 600,
-        },
-      }}
-      hideFooter
-    />
+    <>
+      <DataGridPremium
+        getRowId={(row) => row._id}
+        slots={{ loadingOverlay: LinearProgress }}
+        rows={users}
+        columns={columns}
+        loading={false}
+        initialState={{
+          pagination: { paginationModel: { pageSize: 10 } },
+          pinnedColumns: {  left: ['name'] },
+        }}
+        pageSizeOptions={[5, 10, 25]}
+        sx={{
+          minHeight: '10em',
+          border: 'none',
+          '& .MuiDataGrid-columnHeaders': {
+            borderBottom: 'none',
+          },
+          '& .MuiDataGrid-cell': {
+            borderBottom: 'none',
+          },
+          '& .MuiDataGrid-columnHeaderTitle': {
+            color: theme.palette.text.secondary,
+            fontWeight: 600,
+          },
+        }}
+        hideFooter
+      />
+      <ProfileDialog
+        open={open}
+        onClose={handleClose}
+        user={user}
+      />
+    </>
   );
 }
