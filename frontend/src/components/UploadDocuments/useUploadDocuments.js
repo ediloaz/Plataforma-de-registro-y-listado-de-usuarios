@@ -2,7 +2,7 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useState } from "react";
 import { useAlertMessageContext } from "@components/AlertMessage/AlertMessage";
 
-const ACCEPTED_FILE_TYPES = ['.xml', '.pdf', '.jpg', '.jpeg', '.png', '.gif', '.bmp'];
+const ACCEPTED_FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
 const ACCEPTED_FILE_TYPES_MESSAGE = ACCEPTED_FILE_TYPES.join(', ');
 
 export const useUploadDocuments = ({ setDocument }) => {
@@ -22,7 +22,7 @@ export const useUploadDocuments = ({ setDocument }) => {
     setDocument(selectedFiles[0])
 
     setTimeout(() => {
-      showAlert('success', 'Archivo seleccionado exitosamente')
+      showAlert('success', 'Fotografía seleccionada exitosamente')
       setIsUploadingFiles(false)
       setUploadedFiles(selectedFiles)
     }, 700);
@@ -31,8 +31,6 @@ export const useUploadDocuments = ({ setDocument }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'application/xml': ['.xml'],
-      'application/pdf': ['.pdf'],
       'image/*': ['.jpg', '.jpeg', '.png', '.gif', '.bmp'],
     },
     maxFiles: 1,
