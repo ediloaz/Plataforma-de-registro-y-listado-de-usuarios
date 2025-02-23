@@ -10,7 +10,6 @@ import { RegisterButtonActions } from "@components/RegisterButtonActions/Registe
 export const Register = () => {
   const {
     step,
-    loading,
     setValue,
     setPhoto,
     onNextStep,
@@ -70,6 +69,7 @@ export const Register = () => {
             <RegisterButtonActions
               step={step}
               onNextStep={onNextStep}
+              handleSubmit={handleSubmit}
               onRestartSteps={onRestartSteps}
             />
           </Grid>

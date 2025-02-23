@@ -1,6 +1,7 @@
+import { useLocationForm } from "./useLocationForm";
+import { TextInput } from "@components/CustomInputs/TextInput";
 import { Box, Grid, MenuItem, Typography } from "@mui/material";
 import { SelectInput } from "@components/CustomInputs/SelectInput";
-import { useLocationForm } from "./useLocationForm";
 import { UploadDocuments } from "@components/UploadDocuments/UploadDocuments";
 
 export const LocationForm = (props) => {
@@ -48,6 +49,9 @@ export const LocationForm = (props) => {
               <MenuItem key={district.id} value={district.id}>{district?.name}</MenuItem>
             ))}
           </SelectInput>
+        </Grid>
+        <Grid item xs={12} pb="24px" maxWidth={{ xs: '100% !important', md: '500px !important' }}>
+          <TextInput label="Ingresos mensuales" placeholder="750000" fullWidth color="secondary" {...register("monthlyIncome", "text")} />
         </Grid>
       </Grid>
       <Grid item xs={12} md={6}>

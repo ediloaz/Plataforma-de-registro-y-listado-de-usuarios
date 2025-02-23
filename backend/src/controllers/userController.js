@@ -25,6 +25,21 @@ export const getUserById = async (req, res, next) => {
 export const createUser = async (req, res, next) => {
   try {
     const userData = req.body;
+
+    const documentFile = req.files.documentData ? req.files.documentData[0] : null;
+    const photoFile = req.files.photoData ? req.files.photoData[0] : null;
+
+    // Formatear el ingreso mensual a número
+    userData.monthlyIncome = Number(userData.monthlyIncome);
+    // Dato del documento
+    userData.documentFilename = documentFile?.originalname;
+    userData.documentContentType = documentFile?.mimetype;
+    userData.documentData = documentFile?.buffer;
+    // Dato de la foto
+    userData.photoFilename = photoFile?.originalname;
+    userData.photoContentType = photoFile?.mimetype;
+    userData.photoData = photoFile?.buffer;
+
     const newUser = await UserService.createUser(userData);
     res.status(201).json(newUser);
   } catch (error) {

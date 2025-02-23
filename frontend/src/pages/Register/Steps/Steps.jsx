@@ -1,14 +1,10 @@
-import { useState } from "react";
-import { Box, Grid } from "@mui/material";
-import { RegisterTopBar } from "@components/RegisterTopBar/RegisterTopBar";
-import { RegisterTitle } from "@components/RegisterTitle/RegisterTitle";
-import { RegisterButtonActions } from "@components/RegisterButtonActions/RegisterButtonActions";
+import { Grid } from "@mui/material";
 
-import { BasicForm } from "../BasicForm/BasicForm";
-import { LocationForm } from "../LocationForm/LocationForm";
-import { PhotoForm } from "../PhotoForm/PhotoForm";
+import { BasicForm } from "@pages/Register/BasicForm/BasicForm";
+import { LocationForm } from "@pages/Register/LocationForm/LocationForm";
+import { PhotoForm } from "@pages/Register/PhotoForm/PhotoForm";
 
-export const Steps = ({ step, setValue, setDocument, setPhoto, register, onNextStep, onRestartSteps }) => {
+export const Steps = ({ step, setValue, setDocument, setPhoto, register }) => {
 
   const getStepContent = (step) => {
     switch (step) {

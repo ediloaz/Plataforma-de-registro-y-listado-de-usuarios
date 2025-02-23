@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import * as yup from "yup";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { userModel } from "@models/user.model";
@@ -30,28 +30,7 @@ export const useRegister = () => {
     province: yup.string().required('La provincia es requerida'),
     canton: yup.string().required('El cantón es requerido'),
     district: yup.string().required('El distrito es requerido'),
-    monthlyIncome: yup.string().required('El ingreso mensual es requerido'),
-    // documenIdFile: yup.string().required('El archivo de identificación es requerido'),
-    // photoFile: yup.string().required('El archivo de foto es requerido'),
-    /*
-    MEJORARLO CON ESTO:
-    telefono: yup.object().shape({
-        codigoDeArea: yup.string().required(t('validation.required')),
-        numero: yup.string().required(t('validation.required')).test(
-            'is-number',
-            t('validation.phoneNumber'),
-            value => !isNaN(value)
-        ),
-        descripcion: yup.string().max(255, t('validation.max').replace('${max}', '255'))
-    }),
-    correoElectronico: yup.string().required(t('validation.required')).email(t('validation.email')),
-    direccion: yup.object().shape({
-        nivel1: yup.string().required(t('validation.required')),
-        nivel2: yup.string().required(t('validation.required')),
-        nivel3: yup.string().required(t('validation.required')),
-        otrasSeñales: yup.string().max(255, t('validation.max').replace('${max}', '255'))
-    }),
-    */
+    monthlyIncome: yup.number().required('El ingreso mensual es requerido'),
   });
 
   const formValues = {
@@ -64,9 +43,26 @@ export const useRegister = () => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    console.log(data)
+    const formData = new FormData();
 
-    postUser(data)
+    formData.append('name', data.name);
+    formData.append('lastname', data.lastname);
+    formData.append('email', data.email);
+    formData.append('areaCode', data.areaCode);
+    formData.append('phone', data.phone);
+    formData.append('identificationType', data.identificationType);
+    formData.append('identification', data.identification);
+    formData.append('province', data.province);
+    formData.append('canton', data.canton);
+    formData.append('district', data.district);
+    formData.append('monthlyIncome', data.monthlyIncome);
+
+    // Agrega el archivo del documento
+    formData.append('documentData', document, document.name);
+    // Agrega el archivo de la foto
+    // formData.append('photoData', photoFile, photoFile.name);
+
+    postUser(formData)
     .then((response) => {
       console.log(response)
       showAlert('Usuario creado correctamente', 'success')
@@ -95,6 +91,20 @@ export const useRegister = () => {
     return isValid;
   }
 
+  const checkFieldValuesForSecondStep = () => {
+    const values = getValues();
+    const fields = ['province', 'canton', 'district', 'monthlyIncome'];
+    let isValid = true;
+    fields.forEach(field => {
+      if (values[field] == '' || values[field] == null) {
+        isValid = false;
+        setError(field, { type: 'required', message: 'Este campo es requerido' });
+      }
+    });
+
+    return isValid;
+  }
+
   const onNextStep = () => {
     if (step === 2) {
       return;
@@ -102,6 +112,13 @@ export const useRegister = () => {
 
     if (step == 0) {
       if (!checkFieldValuesForFirstStep()) {
+        showAlert('Complete los campos faltantes', 'warning')
+        return;
+      }
+    }
+
+    if (step == 1) {
+      if (!checkFieldValuesForSecondStep()) {
         showAlert('Complete los campos faltantes', 'warning')
         return;
       }
@@ -120,17 +137,20 @@ export const useRegister = () => {
   const onRestartSteps = () => {
     setStep(0);
     reset();
-
   }
 
   const onAutoComplete = () => {
     setValue('name', 'Nombre');
     setValue('lastname', 'Apellido');
-    setValue('email', 'correo@gmail.com');
+    setValue('email', `correo${Math.random()}@gmail.com`);
     setValue('areaCode', 'CR');
     setValue('phone', '12345678');
     setValue('identificationType', 'cedula');
     setValue('identification', '123456789');
+    setValue('province', '1');
+    setValue('canton', '1');
+    setValue('district', '1');
+    setValue('monthlyIncome', '1000');
   }
 
   useEffect(() => {
@@ -142,8 +162,6 @@ export const useRegister = () => {
       });
     }
   }, []);
-
-  console.log('watch', watch())
 
   return {
     step,

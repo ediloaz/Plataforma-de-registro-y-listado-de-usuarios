@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios, { handleRequestError } from '@utils/axios/axiosInstance.jsx';
 
 const ROOT_URL = '/users/';
+const HEADER_FOR_FORM_DATA = { "Content-Type": "multipart/form-data" }
 
 export const getAllUsers = async () => {
   try {
@@ -23,7 +24,7 @@ export const getUserById = async (userId) => {
 
 export const postUser = async (userData) => {
   try {
-    const { data } = await axios.post(`${ROOT_URL}create`, userData);
+    const { data } = await axios.post(`${ROOT_URL}create`, userData, { headers: HEADER_FOR_FORM_DATA });
     return data;
   } catch (error) {
     handleRequestError(error);

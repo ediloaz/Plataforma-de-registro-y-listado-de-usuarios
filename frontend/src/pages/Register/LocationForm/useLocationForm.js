@@ -79,7 +79,6 @@ export const useLocationForm = ({ register, setValue, setDocument }) => {
     setSelectedDistrict(selectedLevel3);
   }
 
-
   return {
     logo,
     provinces,

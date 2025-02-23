@@ -1,8 +1,6 @@
-import { Box, Button, Chip, CircularProgress, Collapse, Divider, IconButton, Tooltip, Typography } from "@mui/material";
-import { DeleteForeverOutlined, DownloadOutlined, PermMediaOutlined } from "@mui/icons-material";
-import { DataGridPremium } from "@mui/x-data-grid-premium";
-
+import { Box, Button, CircularProgress, Collapse, Divider, Tooltip, Typography } from "@mui/material";
 import { useUploadDocuments } from "./useUploadDocuments";
+import { PermMediaOutlined } from "@mui/icons-material";
 
 export const UploadDocuments = (props) => {
   const {
@@ -11,10 +9,6 @@ export const UploadDocuments = (props) => {
     uploadedFiles,
     getInputProps,
     isUploadingFiles,
-    notUploadedFiles,
-    removeUploadedDocument,
-    isLoadingUploadedFiles,
-    downloadUploadedDocument,
     acceptedFileTypesMessage,
   } = useUploadDocuments(props);
 
