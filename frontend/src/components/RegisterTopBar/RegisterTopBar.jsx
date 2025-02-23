@@ -1,12 +1,9 @@
-import { AppBar, Box, Collapse, Divider, Grid, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
-import { ArrowBackRounded, DarkMode, LightMode, LogoutRounded, Menu } from "@mui/icons-material";
-import { useThemeModeContext, useToggleThemeContext } from "@components/CustomThemeProvider/CustomThemeProvider";
-import { Link } from "react-router-dom";
-import { usePageStore } from "@stores/usePageStore";
+import { AppBar, Box, Collapse, Grid, IconButton, Toolbar, useTheme } from "@mui/material";
+import { ArrowBackRounded } from "@mui/icons-material";
 import { Resources } from "@theme/Resources";
 
 export const RegisterTopBar = ({ step, onPreviousStep, displayMobileImage }) => {
-  const { logo, backgroundTopBar, loginBackground } = Resources();
+  const { backgroundTopBar, loginBackground } = Resources();
   
   const displayBackButton = step !== 0;
   const theme = useTheme();

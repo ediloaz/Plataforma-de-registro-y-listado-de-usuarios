@@ -2,6 +2,7 @@ import { Resources } from "@theme/Resources";
 import { Link, useNavigate } from 'react-router-dom';
 import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, Grid, IconButton, Toolbar, useTheme } from "@mui/material";
+import { SwitchThemeButton } from "../CustomThemeProvider/CustomThemeProvider";
 
 export const TopBar = () => {
   const theme = useTheme();
@@ -35,6 +36,7 @@ export const TopBar = () => {
       }}
     >
       <Toolbar sx={{ height: '83px', px: '68px !important' }}>
+        <SwitchThemeButton sx={{ top: '24px', right: { xs: '110px', md: '130px'} }} />
         <Grid container alignItems="center" justifyContent="space-between">
           <Link to="/list" style={{ display: 'grid', alignItems: 'center' }} ><img src={logoWhite} width={106} alt="logoWhite" /></Link>
           <IconButton title="Salir" onClick={goToRegister}>

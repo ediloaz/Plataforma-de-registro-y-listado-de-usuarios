@@ -1,8 +1,9 @@
 import React, { useContext, createContext } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { CssBaseline, useMediaQuery } from "@mui/material";
+import { Box, CssBaseline, useMediaQuery } from "@mui/material";
 import { getTheme } from "@theme/CustomTheme";
 import { useLocalStorage } from "@hooks/useLocalStorage";
+import { ThemeModeSwitch } from "@components/ThemeModeSwitch/ThemeModeSwitch";
 
 const themeModeContext = createContext();
 const toggleThemeContext = createContext();
@@ -32,3 +33,13 @@ export const CustomThemeProvider = (props) => {
     </themeModeContext.Provider>
   );
 };
+
+export const SwitchThemeButton = ({ sx }) => {
+  const toggleTheme = useToggleThemeContext();
+  const themeMode = useThemeModeContext();
+  return (
+    <Box onClick={toggleTheme} sx={{ zIndex: (theme) => theme.zIndex.drawer + 2, position: 'fixed', top: '0px', right: '20px', ...sx}}>
+      <ThemeModeSwitch checked={themeMode == "dark"} title="Cambiar modo" />
+    </Box>
+  )
+}
