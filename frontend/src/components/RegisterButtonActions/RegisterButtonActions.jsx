@@ -10,13 +10,13 @@ export const RegisterButtonActions = ({ step, onNextStep, handleSubmit, onRestar
   const isFinalStep = step === 2;
 
   return (
-    <Grid container width="100%" px="17px">
-      <Grid item xs={12} md={step == 0 ? 12 : 6}>
+    <Grid container width="100%"  px={{ xs: '17px', md: '38px', xl: '98px' }} display="flex" flexDirection={{ xs: 'row', md: 'row-reverse' }}>
+      <Grid item xs={12} md={step == 0 ? 12 : 2} xl={step == 0 ? 12 : 1}>
         <Button variant="contained" color="primary" sx={{ height: '48px', textTransform: 'none' }} fullWidth onClick={isFinalStep ? handleSubmit : onNextStep}>Continuar</Button>
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={2} xl={1}>
         <Collapse in={step !== 0}>
-          <Button variant="text" color="primary" sx={{ height: '48px', textTransform: 'none' }} fullWidth onClick={_onRestartSteps}>
+          <Button variant="text" color="primary" sx={{  height: '48px', textTransform: 'none' }} fullWidth onClick={_onRestartSteps}>
             Cancelar
           </Button>
         </Collapse>

@@ -19,7 +19,7 @@ export const LocationForm = (props) => {
   } = useLocationForm(props);
 
   return (
-    <Grid container width="100%" columnSpacing={2} sx={{ paddingX: { xs: "17px", md: "98px" } }}>
+    <Grid container width="100%" columnSpacing={{ xs: 0, md:2 }} sx={{ paddingX: { xs: "17px", md: "98px" } }}>
       <Grid item xs={12} md={6}>
         <Grid item xs={12} pb="32px" display={{ xs: 'none', md: 'flex'}} justifyContent="left" alignItems="center">
           <img src={logo} alt="logo" style={{ width: "130px" }} />

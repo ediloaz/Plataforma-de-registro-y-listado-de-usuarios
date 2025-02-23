@@ -8,7 +8,7 @@ export const BasicForm = ({ register }) => {
   const { logo } = useBasicForm();
 
   return (
-    <Grid container width="100%" px="17px">
+    <Grid container width="100%" px={{ xs: '17px', md: '38px', xl: '98px'  }}>
       <Grid item xs={12} pb="32px" mt={{ xs: '0', md: '100px'}} display={{ xs: 'none', md: 'flex'}} justifyContent="left" alignItems="center">
         <img src={logo} alt="logo" style={{ width: "130px" }} />
       </Grid>

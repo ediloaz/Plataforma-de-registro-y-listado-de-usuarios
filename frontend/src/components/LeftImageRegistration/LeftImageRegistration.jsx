@@ -29,7 +29,7 @@ export const LeftImageRegistration = () => {
         },
       }}
     >
-      <img src={loginBackground} alt="loginBackground" style={{ width: "100%", padding: '84px', maxWidth: '700px' }} />
+      <img src={loginBackground} alt="loginBackground" style={{ width: "100%", padding: '84px', maxWidth: '700px', maxHeight: 'min(100vh, 100%)' }} />
     </Box>
   );
 };

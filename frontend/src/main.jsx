@@ -15,6 +15,6 @@ createRoot(document.getElementById('root')).render(
     </Helmet>
     <StrictMode>
       <App />
-    </StrictMode>,
+    </StrictMode>
   </>
 )
