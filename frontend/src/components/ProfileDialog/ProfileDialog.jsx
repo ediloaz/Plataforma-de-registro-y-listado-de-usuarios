@@ -11,16 +11,12 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
   const imgSrc = `data:image/png;base64,${base64Image}`;
   const docSrc = `data:image/png;base64,${base64Image}`;
 
-  console.log('user', user, photoData)
-  console.log('base64Image', base64Image)
-
   return (
     <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={maxWidth} scroll="body" >
         <Box position="absolute" top={0} right={0}>	
           <IconButton onClick={onClose}><CloseOutlined /></IconButton>
         </Box>
       <DialogContent sx={{ px: { xs: 2, md: 5 } }}>
-        {/* new X button to close modal, aligned to right and top of this modal */}
         <Grid container spacing={2} mb={2}>
           <Grid item xs={12} md={4}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '214px', height: '288px' }}>

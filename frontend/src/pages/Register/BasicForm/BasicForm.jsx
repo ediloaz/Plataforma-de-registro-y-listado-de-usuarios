@@ -5,7 +5,7 @@ import { AreaCodeInput } from "@components/CustomInputs/AreaCodeInput";
 import { useBasicForm } from "./useBasicForm";
 
 // temp
-import { Camera } from "@components/Camera/Camera";
+import { CameraDialog } from "@components/CameraDialog/CameraDialog";
 
 export const BasicForm = ({ register }) => {
   const { logo } = useBasicForm();
@@ -21,7 +21,7 @@ export const BasicForm = ({ register }) => {
         </Typography>
       </Grid>
       <Grid item xs={12} pb="4px">
-        <Camera />
+        <CameraDialog open={true}/>
       </Grid>
       <Grid item xs={12} pb="4px">
         <TextInput label="Nombres completos" placeholder="Ingresar nombres" fullWidth color="secondary" {...register("name", "text")} />
