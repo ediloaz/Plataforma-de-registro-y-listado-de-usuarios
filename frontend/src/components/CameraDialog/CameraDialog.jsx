@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import { CameraAltOutlined, CloseOutlined, ReplayOutlined, SaveOutlined } from "@mui/icons-material";
 import { Box, Button, Dialog, DialogContent, Divider, Grid, IconButton, Typography, useTheme } from "@mui/material";
 
-export const CameraDialog = ({ open = false, onClose, maxWidth= 'xs' }) => {
+export const CameraDialog = ({ open = false, onClose, savePhoto }) => {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -23,7 +23,7 @@ export const CameraDialog = ({ open = false, onClose, maxWidth= 'xs' }) => {
   }
 
   const handleSave = () => {
-    onClose(imgSrc);
+    savePhoto(imgSrc);
   }
 
   return (
@@ -47,7 +47,7 @@ export const CameraDialog = ({ open = false, onClose, maxWidth= 'xs' }) => {
                   screenshotQuality={0.8}
                   screenshotFormat="image/jpeg"
                   videoConstraints={{
-                    facingMode: "front",
+                    facingMode: { exact: "user" },
                     height: 600,
                     width: 450,
                   }}
