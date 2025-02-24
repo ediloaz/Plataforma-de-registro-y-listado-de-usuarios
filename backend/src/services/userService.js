@@ -1,7 +1,7 @@
 import User from '../models/userModel.js';
 
 const getAllUsers = async () => {
-  return await User.find();
+  return await User.find().select('-documentData -documentFilename -documentContentType -photoData -photoFilename -photoContentType');
 };
 
 const getUserById = async (id) => {
