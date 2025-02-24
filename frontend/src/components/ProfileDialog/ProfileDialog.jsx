@@ -13,9 +13,9 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={maxWidth} scroll="body" >
-        <Box position="absolute" top={0} right={0}>	
-          <IconButton onClick={onClose}><CloseOutlined /></IconButton>
-        </Box>
+      <Box position="absolute" top={0} right={0}>	
+        <IconButton onClick={onClose}><CloseOutlined /></IconButton>
+      </Box>
       <DialogContent sx={{ px: { xs: 2, md: 5 } }}>
         <Grid container spacing={2} mb={2}>
           <Grid item xs={12} md={4}>
