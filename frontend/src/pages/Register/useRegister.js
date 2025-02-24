@@ -57,10 +57,13 @@ export const useRegister = () => {
     formData.append('district', data.district);
     formData.append('monthlyIncome', data.monthlyIncome);
 
-    // Agrega el archivo del documento
-    formData.append('documentData', document, document.name);
-    // Agrega el archivo de la foto
-    // formData.append('photoData', photoFile, photoFile.name);
+    if (document) {
+      formData.append('documentData', document, document.name);
+    }
+
+    if (photo) {
+      formData.append('photoData', photo, photo.name);
+    }
 
     postUser(formData)
     .then((response) => {

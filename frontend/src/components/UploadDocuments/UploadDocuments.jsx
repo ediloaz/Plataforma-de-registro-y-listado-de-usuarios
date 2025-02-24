@@ -4,6 +4,7 @@ import { PermMediaOutlined } from "@mui/icons-material";
 
 export const UploadDocuments = (props) => {
   const {
+    document,
     getRootProps,
     isDragActive,
     uploadedFiles,
@@ -33,7 +34,15 @@ export const UploadDocuments = (props) => {
             {
               isUploadingFiles 
               ? <CircularProgress sx={{ width: 50, height: 50, mb: 1.2 }} />
-              : <PermMediaOutlined color="secondary" sx={{ width: 50, height: 50 }} />
+              : 
+              document ? (
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <img src={document} alt={`document-id-picture`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img>
+                </Box>
+              ) : (
+                <PermMediaOutlined color="secondary" sx={{ width: 50, height: 50 }} />
+              )
+              
             }
             <Typography sx={{ display: 'block', marginTop: '10px' }}>
               Arrastrar aquí

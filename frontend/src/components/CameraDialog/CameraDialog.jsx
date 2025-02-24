@@ -1,7 +1,7 @@
-import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
+import { useCallback, useRef, useState } from "react";
+import { Box, Dialog, DialogContent, Grid, IconButton, useTheme } from "@mui/material";
 import { CameraAltOutlined, CloseOutlined, ReplayOutlined, SaveOutlined } from "@mui/icons-material";
-import { Box, Button, Dialog, DialogContent, Divider, Grid, IconButton, Typography, useTheme } from "@mui/material";
 
 export const CameraDialog = ({ open = false, onClose, savePhoto }) => {
   const webcamRef = useRef(null);
@@ -11,7 +11,17 @@ export const CameraDialog = ({ open = false, onClose, savePhoto }) => {
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot({width: 450, height: 600});
-    setImgSrc(imageSrc);
+    // Save as File to send to server
+    const byteString = atob(imageSrc.split(',')[1]);
+    const mimeString = imageSrc.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], {type: mimeString});
+    const file = new File([blob], 'photo.jpg', {type: mimeString});
+    setImgSrc(file);
   }, [webcamRef]);
   
   const retake = () => {

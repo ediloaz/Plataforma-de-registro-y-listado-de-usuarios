@@ -8,6 +8,7 @@ const ACCEPTED_FILE_TYPES_MESSAGE = ACCEPTED_FILE_TYPES.join(', ');
 export const useUploadDocuments = ({ setDocument }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isUploadingFiles, setIsUploadingFiles] = useState(false);
+  const [document, _setDocument] = useState(null);
 
   const showAlert = useAlertMessageContext();
   
@@ -21,8 +22,16 @@ export const useUploadDocuments = ({ setDocument }) => {
     setIsUploadingFiles(true)
     setDocument(selectedFiles[0])
 
+    if (FileReader) {
+      var fr = new FileReader();
+      fr.onload = function () {
+        _setDocument(fr.result)
+      }
+      fr.readAsDataURL(selectedFiles[0])
+    }
+
     setTimeout(() => {
-      showAlert('success', 'Fotografía seleccionada exitosamente')
+      showAlert('Fotografía seleccionada exitosamente', 'success')
       setIsUploadingFiles(false)
       setUploadedFiles(selectedFiles)
     }, 700);
@@ -40,6 +49,7 @@ export const useUploadDocuments = ({ setDocument }) => {
   
 
   return {
+    document,
     getRootProps,
     isDragActive,
     uploadedFiles,

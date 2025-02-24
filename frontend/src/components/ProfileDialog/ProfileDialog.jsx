@@ -6,10 +6,12 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
     if (reason === "backdropClick" || reason === "escapeKeyDown") onClose()
   }
 
-  const photoData = user?.documentData?.data;
-  const base64Image = btoa(String.fromCharCode(...new Uint8Array(photoData)));
-  const imgSrc = `data:image/png;base64,${base64Image}`;
-  const docSrc = `data:image/png;base64,${base64Image}`;
+  const photoData = user?.photoData?.data;
+  const base64PhotoImage = btoa(String.fromCharCode(...new Uint8Array(photoData)));
+  const photoSrc = `data:${user?.photoContentType};base64,${base64PhotoImage}`
+  const documentData = user?.documentData?.data;
+  const base64DocumentImage = btoa(String.fromCharCode(...new Uint8Array(documentData)));
+  const docSrc = `data:${user?.documentContentType};base64,${base64DocumentImage}`;
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={maxWidth} scroll="body" >
@@ -20,7 +22,7 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
         <Grid container spacing={2} mb={2}>
           <Grid item xs={12} md={4}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '214px', height: '288px' }}>
-              <img src={imgSrc} alt={`profile-picture-${user?.name}`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img>
+              <img src={photoSrc} alt={`profile-picture-${user?.name}`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img>
             </Box>
           </Grid>
           <Grid item xs={12} md={8}>
