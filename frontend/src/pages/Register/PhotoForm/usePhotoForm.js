@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const usePhotoForm = ({ setPhoto }) => {
+export const usePhotoForm = ({ photo: photoParam, setPhoto }) => {
   const [open, setOpen] = useState(false);
-  const [photo, _setPhoto] = useState(null);
+  const [photoSrc, setPhotoSrc] = useState(null);
+  const [photoError, setPhotoError] = useState(false);
+
+  useEffect(() => {
+    if (photoParam == false) {
+      setPhotoError(true);
+    } else {
+      setPhotoError(false);
+    }
+  }, [photoParam]);
 
   const handleClose = () => {
     setOpen(false);
@@ -12,16 +21,17 @@ export const usePhotoForm = ({ setPhoto }) => {
     setOpen(true);
   }
 
-  const savePhoto = (photo) => {
+  const savePhoto = (photo, photoSrc) => {
     setPhoto(photo);
-    _setPhoto(photo);
+    setPhotoSrc(photoSrc);
     handleClose();
   }
   
   return {
     open,
-    photo,
+    photoSrc,
     savePhoto,
+    photoError,
     handleOpen,
     handleClose,
   };

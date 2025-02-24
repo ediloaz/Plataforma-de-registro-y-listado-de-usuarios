@@ -2,15 +2,24 @@ import { useState, useEffect } from "react";
 import locations from "@data/locations.json";
 import { Resources } from "@theme/Resources";
 
-export const useLocationForm = ({ register, setValue, setDocument }) => {
+export const useLocationForm = ({ document, register, setValue, setDocument }) => {
   const [provinces, setProvinces] = useState([]);
   const [cantons, setCantons] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedCanton, setSelectedCanton] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const [documentError, setDocumentError] = useState(false);
 
   const { logo } = Resources();
+
+  useEffect(() => {
+    if (document == false) {
+      setDocumentError(true);
+    } else {
+      setDocumentError(false);
+    }
+  }, [document]);
 
   useEffect(() => {
     if (locations && locations?.provincias) {
@@ -87,6 +96,7 @@ export const useLocationForm = ({ register, setValue, setDocument }) => {
     register,
     setValue,
     setDocument,
+    documentError,
     handleOnChangeAddressLevel1,
     handleOnChangeAddressLevel2,
     handleOnChangeAddressLevel3,

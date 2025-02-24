@@ -5,7 +5,7 @@ import { useAlertMessageContext } from "@components/AlertMessage/AlertMessage";
 const ACCEPTED_FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
 const ACCEPTED_FILE_TYPES_MESSAGE = ACCEPTED_FILE_TYPES.join(', ');
 
-export const useUploadDocuments = ({ setDocument }) => {
+export const useUploadDocuments = ({ documentError, setDocument }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isUploadingFiles, setIsUploadingFiles] = useState(false);
   const [document, _setDocument] = useState(null);
@@ -52,6 +52,7 @@ export const useUploadDocuments = ({ setDocument }) => {
     document,
     getRootProps,
     isDragActive,
+    documentError,
     uploadedFiles,
     getInputProps,
     isUploadingFiles,

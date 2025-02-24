@@ -7,6 +7,7 @@ export const UploadDocuments = (props) => {
     document,
     getRootProps,
     isDragActive,
+    documentError,
     uploadedFiles,
     getInputProps,
     isUploadingFiles,
@@ -53,6 +54,7 @@ export const UploadDocuments = (props) => {
             <Button variant="contained" color="inherit" size="small" sx={{ textTransform: 'none', boxShadow: 'none', fontWeight: 'bold' }}>
               Seleccionar archivo
             </Button>
+            {documentError && <Typography color="error">Debe cargar el documento</Typography>}
             {uploadedFiles.length > 0 &&
               <Collapse in={uploadedFiles.length > 0}>
                 <Box mt={2} width="100%">

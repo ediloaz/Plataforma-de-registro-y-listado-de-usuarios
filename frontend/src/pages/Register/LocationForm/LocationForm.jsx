@@ -13,6 +13,7 @@ export const LocationForm = (props) => {
     register,
     setValue,
     setDocument,
+    documentError,
     handleOnChangeAddressLevel1,
     handleOnChangeAddressLevel2,
     handleOnChangeAddressLevel3,
@@ -61,7 +62,7 @@ export const LocationForm = (props) => {
           </Typography>
         </Grid>
         <Box display="flex" justifyContent="center" width="100%">
-          <UploadDocuments setValue={setValue} setDocument={setDocument} />
+          <UploadDocuments documentError={documentError} setValue={setValue} setDocument={setDocument} />
         </Box>
       </Grid>
     </Grid>

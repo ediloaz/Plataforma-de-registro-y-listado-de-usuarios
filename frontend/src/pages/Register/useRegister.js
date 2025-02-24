@@ -59,10 +59,18 @@ export const useRegister = () => {
 
     if (document) {
       formData.append('documentData', document, document.name);
+    } else {
+      showAlert('Debe seleccionar un documento', 'error')
+      setLoading(false)
+      return;
     }
 
     if (photo) {
       formData.append('photoData', photo, photo.name);
+    } else {
+      showAlert('Debe seleccionar una foto', 'error')
+      setLoading(false)
+      return;
     }
 
     postUser(formData)
@@ -105,7 +113,21 @@ export const useRegister = () => {
       }
     });
 
+    if (document == null) {
+      setDocument(false);
+      isValid = false;
+    }
+
     return isValid;
+  }
+
+  const checkFieldValuesForThirdStep = () => {
+    if (photo == null) {
+      setPhoto(false);
+      return false;
+    }
+
+    return true;
   }
 
   const onNextStep = () => {
@@ -122,6 +144,13 @@ export const useRegister = () => {
 
     if (step == 1) {
       if (!checkFieldValuesForSecondStep()) {
+        showAlert('Complete los campos faltantes', 'warning')
+        return;
+      }
+    }
+
+    if (step == 2) {
+      if (!checkFieldValuesForThirdStep()) {
         showAlert('Complete los campos faltantes', 'warning')
         return;
       }
@@ -168,7 +197,9 @@ export const useRegister = () => {
 
   return {
     step,
+    photo,
     loading,
+    document,
     setValue,
     setPhoto,
     onNextStep,

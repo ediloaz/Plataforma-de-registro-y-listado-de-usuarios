@@ -6,8 +6,9 @@ import { CameraDialog } from "../../../components/CameraDialog/CameraDialog";
 export const PhotoForm = (props) => {
   const {
     open,
-    photo,
+    photoSrc,
     savePhoto,
+    photoError,
     handleOpen,
     handleClose,
   } = usePhotoForm(props);
@@ -16,9 +17,9 @@ export const PhotoForm = (props) => {
     <Grid container width="100%" columnSpacing={2} sx={{ paddingX: { xs: "17px", md: "98px" } }}>
       <CameraDialog open={open} onClose={handleClose} savePhoto={savePhoto} />
       <Grid item xs={12} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-        {photo ? (
+        {photoSrc ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', width: '214px', height: '288px' }}>
-            <img src={photo} alt={`profile-picture-`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img>
+            <img src={photoSrc} alt={`profile-picture-`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img>
           </Box>
         ) : (
           <CameraAltOutlined sx={{ fontSize: 100 }} />
@@ -29,6 +30,7 @@ export const PhotoForm = (props) => {
         <Typography fontSize="16px" textAlign="center">
           Sonríe y asegúrate de tener buena iluminación.
         </Typography>
+        {photoError && <Typography color="error">Debe cargar la foto</Typography>}
         <Button variant="contained" color="primary" size="large" sx={{ marginTop: 2 }} onClick={handleOpen}>
           Tomar foto
         </Button>

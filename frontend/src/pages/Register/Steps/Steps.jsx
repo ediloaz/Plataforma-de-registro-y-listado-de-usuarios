@@ -4,16 +4,16 @@ import { BasicForm } from "@pages/Register/BasicForm/BasicForm";
 import { LocationForm } from "@pages/Register/LocationForm/LocationForm";
 import { PhotoForm } from "@pages/Register/PhotoForm/PhotoForm";
 
-export const Steps = ({ step, setValue, setDocument, setPhoto, register }) => {
+export const Steps = ({ step, photo, document, setValue, setDocument, setPhoto, register }) => {
 
   const getStepContent = (step) => {
     switch (step) {
       case 0:
         return <BasicForm register={register} />;
       case 1:
-        return <LocationForm register={register} setValue={setValue} setDocument={setDocument} />;
+        return <LocationForm register={register} setValue={setValue} document={document} setDocument={setDocument} />;
       case 2:
-        return <PhotoForm register={register} setValue={setValue} setPhoto={setPhoto} />;
+        return <PhotoForm register={register} setValue={setValue} photo={photo} setPhoto={setPhoto} />;
       default:
         return <BasicForm register={register} />;
     }

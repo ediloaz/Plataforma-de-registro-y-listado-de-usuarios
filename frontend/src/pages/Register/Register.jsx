@@ -11,6 +11,8 @@ import { SwitchThemeButton } from "../../components/CustomThemeProvider/CustomTh
 export const Register = () => {
   const {
     step,
+    photo,
+    document,
     setValue,
     setPhoto,
     onNextStep,
@@ -61,6 +63,8 @@ export const Register = () => {
             />
             <Steps
               step={step}
+              photo={photo}
+              document={document}
               setPhoto={setPhoto}
               register={register}
               setValue={setValue}
