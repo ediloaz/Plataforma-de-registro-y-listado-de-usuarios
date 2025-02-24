@@ -21,7 +21,7 @@ export const BasicForm = ({ register }) => {
         </Typography>
       </Grid>
       <Grid item xs={12} pb="4px">
-        <TextInput label="Nombres completos" placeholder="Ingresar nombres" fullWidth color="secondary" {...register("name", "text")} />
+        <TextInput label="Nombre completo" placeholder="Ingresar nombre" fullWidth color="secondary" {...register("name", "text")} />
       </Grid>
       <Grid item xs={12} pb="4px">
         <TextInput label="Apellidos" placeholder="Ingresar apellidos" fullWidth color="secondary" {...register("lastname", "text")} />
