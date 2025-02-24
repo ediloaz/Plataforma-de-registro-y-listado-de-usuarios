@@ -31,6 +31,7 @@ export const postUser = async (userData) => {
   }
 };
 
+// Estos métodos no se utilizaron, pero los dejé previstos por si se necesitan en el futuro. Igual, el Backend ya los tiene configurados.
 export const editUser = async (userId, userData) => {
   try {
     const { data } = await axios.put(`${ROOT_URL}update/${userId}`, userData);
@@ -40,6 +41,7 @@ export const editUser = async (userId, userData) => {
   }
 };
 
+// Estos métodos no se utilizaron, pero los dejé previstos por si se necesitan en el futuro. Igual, el Backend ya los tiene configurados.
 export const deleteUser = async (userId) => {
   try {
     const { data } = await axios.delete(`${ROOT_URL}delete/${userId}`);
