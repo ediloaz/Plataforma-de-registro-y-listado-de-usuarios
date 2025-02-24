@@ -52,7 +52,9 @@ export const LocationForm = (props) => {
           </SelectInput>
         </Grid>
         <Grid item xs={12} pb="24px" maxWidth={{ xs: '100% !important', md: '500px !important' }}>
-          <TextInput label="Ingresos mensuales" placeholder="750000" fullWidth color="secondary" {...register("monthlyIncome", "text")} />
+          <TextInput label="Ingresos mensuales" placeholder="750000" fullWidth color="secondary" {...register("monthlyIncome", "text")} 
+          InputProps={{ startAdornment: <Typography fontSize="14px" fontWeight="bold" mr={1}>$</Typography> }}
+          />
         </Grid>
       </Grid>
       <Grid item xs={12} md={6}>

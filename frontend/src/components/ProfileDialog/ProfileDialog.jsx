@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { CloseOutlined } from "@mui/icons-material";
 import { getUserById } from "@services/users.service";
 import { Box, Dialog, DialogContent, Divider, Grid, IconButton, Typography } from "@mui/material";
+import Flag from "react-world-flags";
+import { formatCurrency } from "@helpers/money";
 
 export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) => {
   const [photoSrc, setPhotoSrc] = useState(null);
@@ -28,6 +30,8 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
     } else {
+      setPhotoSrc(null);
+      setDocSrc(null);
       setLoading(false);
     }
   }, [user])
@@ -51,7 +55,11 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
             <Grid container spacing={2} mt={1}>
               <Grid item xs={12} md={6}>
                 <InfoField label="Correo electrónico" value={user?.email} />
-                <InfoField label="Número de teléfono" value={user?.phone} />
+                <InfoField label="Número de teléfono" value={
+                  <>
+                  <Flag code={user?.areaCode} width="28" style={{ marginRight: "0.4em" }} /> {user?.phone}
+                  </>
+                  } />
                 <InfoField label="Tipo de documento" value={user?.identificationType} />
                 <InfoField label="Número de document" value={user?.identification} />
               </Grid>
@@ -59,7 +67,7 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
                 <InfoField label="Provincia" value={user?.province} />
                 <InfoField label="Cantón" value={user?.canton} />
                 <InfoField label="Distrito" value={user?.district} />
-                <InfoField label="Ingresos mensuales" value={user?.monthlyIncome} />
+                <InfoField label="Ingresos mensuales" value={formatCurrency(user?.monthlyIncome)} />
               </Grid>
               <Grid item xs={12} md={6}>
               </Grid>
@@ -91,7 +99,8 @@ const InfoField = ({ label, value }) => {
         <Typography fontSize={14} fontWeight={400}>{label}</Typography>
       </Grid>
       <Grid item xs={12} sx={{ color: '#667085' }}>
-        <Typography fontSize={14} fontWeight={400}>{value}</Typography>
+        <Typography fontSize={14} fontWeight={400} display="flex" alignItems="center">
+          {value}</Typography>
       </Grid>
     </Grid>
   )

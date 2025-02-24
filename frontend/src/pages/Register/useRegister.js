@@ -7,6 +7,7 @@ import { postUser } from "@services/users.service";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCustomRegister } from "@hooks/useCustomRegister";
 import { useAlertMessageContext } from "@components/AlertMessage/AlertMessage";
+import { getCantonName, getDistrictName, getProvinceName } from "@helpers/locations";
 
 const ENV = import.meta.env.VITE_API_ENV;
 
@@ -30,7 +31,7 @@ export const useRegister = () => {
     province: yup.string().required('La provincia es requerida'),
     canton: yup.string().required('El cantón es requerido'),
     district: yup.string().required('El distrito es requerido'),
-    monthlyIncome: yup.number().required('El ingreso mensual es requerido'),
+    monthlyIncome: yup.number().required('El ingreso mensual es requerido').min(0, 'El ingreso mensual debe ser mayor a 0').typeError('El ingreso mensual debe ser un número'),
   });
 
   const formValues = {
@@ -52,9 +53,9 @@ export const useRegister = () => {
     formData.append('phone', data.phone);
     formData.append('identificationType', data.identificationType);
     formData.append('identification', data.identification);
-    formData.append('province', data.province);
-    formData.append('canton', data.canton);
-    formData.append('district', data.district);
+    formData.append('province', getProvinceName(data.province));
+    formData.append('canton', getCantonName(data.province, data.canton));
+    formData.append('district', getDistrictName(data.province, data.canton, data.district));
     formData.append('monthlyIncome', data.monthlyIncome);
 
     if (document) {
@@ -177,7 +178,7 @@ export const useRegister = () => {
     setValue('email', `correo${Math.random()}@gmail.com`);
     setValue('areaCode', 'CR');
     setValue('phone', '12345678');
-    setValue('identificationType', 'cedula');
+    setValue('identificationType', 'Cédula');
     setValue('identification', '123456789');
     setValue('province', '1');
     setValue('canton', '1');

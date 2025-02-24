@@ -10,7 +10,10 @@ export const ListUsers = () => {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({});
   
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setUser(null);
+    setOpen(false);
+  }
 
   const handleOpen = (user) => {
     console.log('Abrir el usuario', user);
@@ -75,7 +78,8 @@ export const ListUsers = () => {
             fontWeight: 600,
           },
         }}
-        hideFooter
+        autoHeight
+        pagination
       />
       <ProfileDialog
         open={open}
