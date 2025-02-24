@@ -1,17 +1,36 @@
-import { Box, Dialog, DialogContent, Divider, Grid, IconButton, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { CloseOutlined } from "@mui/icons-material";
+import { getUserById } from "@services/users.service";
+import { Box, Dialog, DialogContent, Divider, Grid, IconButton, Typography } from "@mui/material";
 
 export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) => {
+  const [photoSrc, setPhotoSrc] = useState(null);
+  const [docSrc, setDocSrc] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const handleClose = (event, reason = "") => {
     if (reason === "backdropClick" || reason === "escapeKeyDown") onClose()
   }
 
-  const photoData = user?.photoData?.data;
-  const base64PhotoImage = btoa(String.fromCharCode(...new Uint8Array(photoData)));
-  const photoSrc = `data:${user?.photoContentType};base64,${base64PhotoImage}`
-  const documentData = user?.documentData?.data;
-  const base64DocumentImage = btoa(String.fromCharCode(...new Uint8Array(documentData)));
-  const docSrc = `data:${user?.documentContentType};base64,${base64DocumentImage}`;
+  useEffect(() => {
+    if (user && user?._id) {
+      getUserById(user._id)
+        .then((data) => {
+          const photoData = data?.photoData?.data;
+          const base64PhotoImage = btoa(String.fromCharCode(...new Uint8Array(photoData)));
+          const photoSrc = `data:${data?.photoContentType};base64,${base64PhotoImage}`;
+          setPhotoSrc(photoData ? photoSrc : null);
+          const documentData = data?.documentData?.data;
+          const base64DocumentImage = btoa(String.fromCharCode(...new Uint8Array(documentData)));
+          const docSrc = `data:${data?.documentContentType};base64,${base64DocumentImage}`;
+          setDocSrc(documentData ? docSrc : null);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
+  }, [user])
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={maxWidth} scroll="body" >
@@ -22,7 +41,9 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
         <Grid container spacing={2} mb={2}>
           <Grid item xs={12} md={4}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '214px', height: '288px' }}>
-              <img src={photoSrc} alt={`profile-picture-${user?.name}`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img>
+              {photoSrc 
+              ? <img src={photoSrc} alt={`profile-picture-${user?.name}`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }} /> 
+              : null}
             </Box>
           </Grid>
           <Grid item xs={12} md={8}>
@@ -52,7 +73,9 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
           </Grid>
           <Grid item xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '214px', height: '134px' }}>
-              <img src={docSrc} alt={`id-document-file-${user?.identification}`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img>
+            {docSrc 
+            ? <img src={docSrc} alt={`id-document-file-${user?.identification}`} style={{ borderRadius: "2px", width: '100%', maxWidth: '214px', maxHeight: '288px' }}></img> 
+            : null}
             </Box>
           </Grid>
         </Grid>
