@@ -8,6 +8,8 @@ import { getAreaCodes, getProducts } from "@services/type.services";
 import { getUser } from '@services/user.service';
 import { getHolidays } from '@services/holidays.services';
 
+// Archivos de ejemplo de cómo se utilizaría el store con la librería zustand, lo tenía en otro proyecto y lo copié aquí.
+
 export const useStaticStore = create(
   persist(
     (set, get) => ({
