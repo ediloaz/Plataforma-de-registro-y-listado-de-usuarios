@@ -27,7 +27,7 @@ export const CameraDialog = ({ open = false, onClose, savePhoto }) => {
   }
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth={false} scroll="body" maxWidth="xs" PaperProps={{ sx: { overflowX: 'hidden'} }}>
+    <Dialog open={open} onClose={handleClose} fullWidth={false} scroll="body" maxWidth="xs" PaperProps={{ sx: { overflowX: { xs: 'auto', md: 'hidden'} } }}>
       <Box position="absolute" top={0} right={0} sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>	
         <IconButton onClick={onClose}><CloseOutlined /></IconButton>
       </Box>
