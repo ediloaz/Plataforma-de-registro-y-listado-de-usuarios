@@ -4,6 +4,7 @@ import { getUserById } from "@services/users.service";
 import { Box, Dialog, DialogContent, Divider, Grid, IconButton, Typography } from "@mui/material";
 import Flag from "react-world-flags";
 import { formatCurrency } from "@helpers/money";
+import { arrayBufferToBase64 } from "@helpers/images";
 
 export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) => {
   const [photoSrc, setPhotoSrc] = useState(null);
@@ -13,18 +14,19 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
   const handleClose = (event, reason = "") => {
     if (reason === "backdropClick" || reason === "escapeKeyDown") onClose()
   }
-
+  
   useEffect(() => {
     if (user && user?._id) {
       getUserById(user._id)
         .then((data) => {
           const photoData = data?.photoData?.data;
-          const base64PhotoImage = btoa(String.fromCharCode(...new Uint8Array(photoData)));
+          const base64PhotoImage = arrayBufferToBase64(photoData);
           const photoSrc = `data:${data?.photoContentType};base64,${base64PhotoImage}`;
           setPhotoSrc(photoData ? photoSrc : null);
           const documentData = data?.documentData?.data;
-          const base64DocumentImage = btoa(String.fromCharCode(...new Uint8Array(documentData)));
+          const base64DocumentImage = arrayBufferToBase64(documentData);
           const docSrc = `data:${data?.documentContentType};base64,${base64DocumentImage}`;
+          console.log(docSrc, documentData, data?.documentContentType);
           setDocSrc(documentData ? docSrc : null);
         })
         .catch((error) => console.error(error))
@@ -61,7 +63,7 @@ export const ProfileDialog = ({ user, open = false, onClose, maxWidth= 'md' }) =
                   </>
                   } />
                 <InfoField label="Tipo de documento" value={user?.identificationType} />
-                <InfoField label="Número de document" value={user?.identification} />
+                <InfoField label="Número de documento" value={user?.identification} />
               </Grid>
               <Grid item xs={12} md={6}>
                 <InfoField label="Provincia" value={user?.province} />
